@@ -1,0 +1,27 @@
+@page "/events"
+@using EventEase.Models
+
+<h1>Events</h1>
+
+<!-- Virtualize improves performance with large datasets -->
+<Virtualize Items="@Events" Context="ev">
+    <EventCard Event="ev" />
+</Virtualize>
+
+@code {
+    private List<EventModel> Events = new();
+
+    protected override void OnInitialized()
+    {
+        // Generate a large dataset to test performance
+        for (int i = 1; i <= 1000; i++)
+        {
+            Events.Add(new EventModel
+            {
+                Name = $"Event {i}",
+                Date = DateTime.Today.AddDays(i),
+                Location = "Mexico City"
+            });
+        }
+    }
+}
